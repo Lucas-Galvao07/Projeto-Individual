@@ -1,2 +1,2 @@
 # SP-Tech
-Atividades e projetos da Faculdade
+Projeto Individual do Primeiro semestre
