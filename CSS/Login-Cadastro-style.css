@@ -44,4 +44,127 @@ body {
     transform: translateY(-2px);
 }
 
-/* ======================== Cadastro ======================== */
+/* ======================== Layout ======================== */
+
+.box {
+    margin-top: 65px;
+    display: flex;
+    height: calc(100vh - 65px);
+}
+
+/* ======================== Imagem Login ======================== */
+
+.esquerda-login {
+    width: 50%;
+    height: 100%;
+    background-image: url('../ASSETS/Jin-Painel.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ======================== Imagem Cadastro ======================== */
+
+.esquerda-cadastro {
+    width: 50%;
+    height: 100%;
+    background-image: url('../ASSETS/Daewi-Painel.jpeg');
+    background-size: cover;
+    background-position: top;
+}
+
+.direita {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #111;
+}
+
+.direita h1 {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 2.2rem;
+    color: #0077ff;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+}
+
+/* ======================== Inputs ======================== */
+
+.input_box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 16px;
+}
+
+.input_box span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input_box input,
+.input_box select {
+    background: #1a1a1a;
+    border: 1px solid rgba(0, 119, 255, 0.3);
+    border-radius: 6px;
+    padding: 12px 14px;
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.25s;
+}
+
+.input_box input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.input_box input:hover,
+.input_box input:focus {
+    border-color: rgba(0, 119, 255, 0.8);
+    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.12);
+}
+
+/* ======================== Botão ======================== */
+
+button {
+    margin-top: 8px;
+    width: 100%;
+    max-width: 360px;
+    padding: 13px;
+    background: #0077ff;
+    color: white;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #005ecc;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ======================== Mensagem de feedback ======================== */
+
+.mensagem {
+    font-size: 0.85rem;
+    color: #0077ff;
+    margin-top: 10px;
+    text-align: center;
+}

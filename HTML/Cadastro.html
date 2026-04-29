@@ -13,8 +13,8 @@
         <div class="container nav-content">
             <div class="nav-logo">GOH</div>
             <div class="nav-links">
-                <a href="Home.html" class="nav-ativo">Home</a>
-                <a href="#Sobre">Sobre</a>
+                <a href="index.html#Inicio" class="nav-ativo">Home</a>
+                <a href="index.html#Sobre">Sobre</a>
                 <a href="Login.html" class="nav-login">Entrar</a>
                 <a href="Cadastro.html" class="nav-cadastro">Cadastrar</a>
                 <a href="Personagens.html" class="nav-logado">Personagens</a>
@@ -24,59 +24,42 @@
     </nav>
 
     <div id="div_cadastro" class="box">
-        <div class="esquerda">
-            <img src="../ASSETS/Haetae-Painel.webp" alt="">
-        </div>
+
+        <div class="esquerda-cadastro"></div>
 
         <div class="direita">
             <h1>Cadastro</h1>
 
             <div class="input_box">
                 <span>Nome</span>
-                <input type="text" id="val_nome" placeholder=" ">
-            </div>
-
-            <div class="input_box">
-                <span>Data de Nascimento</span>
-                <input type="date" id="val_nascimento" placeholder=" ">
-            </div>
-
-            <div class="input_box">
-                <span>Estilo de Luta</span>
-                <select name="" id="sel_luta">
-                    <option value="">Taekwondo</option>
-                    <option value="">Karate</option>
-                    <option value="">Espada</option>
-                    <option value="">Charyeok</option>
-                </select>
+                <input type="text" id="val_nome" placeholder="Ex: Jin Mori">
             </div>
 
             <div class="input_box">
                 <span>Email</span>
-                <input type="text" id="val_email" placeholder=" ">
+                <input type="text" id="val_email" placeholder="seuemail@gmail.com">
             </div>
 
             <div class="input_box">
                 <span>Senha</span>
-                <input type="password" id="val_senha" placeholder=" ">
+                <input type="password" id="val_senha" placeholder="••••••••">
             </div>
 
             <div class="input_box">
                 <span>Confirmar senha</span>
-                <input type="password" id="val_confirmar" placeholder=" ">
+                <input type="password" id="val_confirmar" placeholder="••••••••">
             </div>
 
             <button onclick="cadastrar()">Cadastrar</button>
-            <br><br>
+
             <div id="mensagem" class="mensagem"></div>
         </div>
-    </div>
 
+    </div>
 </body>
 
 <script>
     function cadastrar() {
-
         let nome = val_nome.value.trim()
         let email = val_email.value.trim()
         let senha = val_senha.value.trim()
@@ -110,7 +93,6 @@
         if (erros == false) {
             alert("Cadastro realizado")
         }
-
     }
 </script>
 
