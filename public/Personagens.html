@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/Personagens-style.css">
+    <title>Personagens</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="nav-logo">GOH</div>
+            <div class="nav-links">
+                <a href="index.html#Inicio" class="nav-ativo">Home</a>
+                <a href="index.html#Sobre">Sobre</a>
+                <a href="Login.html" class="nav-login">Entrar</a>
+                <a href="Cadastro.html" class="nav-cadastro">Cadastrar</a>
+                <a href="#inicio" class="nav-logado">Personagens</a>
+                <a href="Dashboard.html" class="nav-logado">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-personagens">
+
+        <div class="header-personagens" id="inicio">
+            <h1>Personagens</h1>
+        </div>
+
+        <div class="descricao-personagens">
+            <h3>
+                Explore os personagens disponíveis e escolha seu favorito para batalhar.
+            </h3>
+        </div>
+
+        <div class="filtros-personagens">
+
+            <!-- filtro por organização -->
+            <div class="select-box">
+                <select id="selectOrganizacao" class="filtro-organizacao">
+                    <option value="">Todas as Organizações</option>
+                </select>
+            </div>
+
+            <!-- filtro por nome, sla, se der talvez fique daora-->
+            <input type="text" id="val_BuscaPersonagem" class="input-busca" placeholder="Buscar personagem...">
+
+        </div>
+
+        <div id="containerPersonagens" class="grid-personagens">
+            <!-- personagens vêm do banco via JS -->
+            <div class="card-personagem">
+
+                <img src="../ASSETS/Jin-Painel.jpg" class="img-personagem">
+
+                <h2 class="nome-personagem">Jin Mori</h2>
+
+                <p class="poder-personagem">Nirvana</p>
+
+                <!-- ações -->
+                <div class="acoes-personagem">
+                    <button class="btn-favoritar">⭐</button>
+                    <button class="btn-usar">Usar</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

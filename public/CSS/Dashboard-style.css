@@ -1,0 +1,46 @@
+@import url(https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700;900&display=swap);
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #0a0a0a;
+    color: white;
+}
+
+.container {
+    width: 87%;
+    margin: auto;
+}
+
+/* ======================== Navbar ======================== */
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 18px 0;
+    border-bottom: 6px solid rgba(0, 119, 255, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 1px solid rgba(0, 119, 255, 0.4);
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    transform: translateY(-2px);
+}
+
