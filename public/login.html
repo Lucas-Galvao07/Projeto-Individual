@@ -46,6 +46,8 @@
             <button onclick="entrar()">Logar</button>
         </div>
 
+        <div id="cardErro" class="card-erro"></div>
+
     </div>
 </body>
 
@@ -55,18 +57,32 @@
     function entrar() {
         // aguardar();
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = email_input.value.trim();
+        var senhaVar = senha_input.value.trim();
 
+        // validação campos vazios
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            mensagem_erro.innerHTML = "Preencha todos os campos!";
+            console.log("Preencha todos os campos!")
             return false;
         }
-        // else {
-        //     setInterval(sumirMensagem, 5000)
-        // }
+
+        // validação básica de email
+        if (!emailVar.includes("@") || !emailVar.includes(".")) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Email inválido!";
+            console.log("Email inválido!")
+            return false;
+        }
+
+        // validação tamanho da senha
+        if (senhaVar.length < 6) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Senha deve ter pelo menos 6 caracteres!";
+            console.log("Senha deve ter pelo menos 6 caracteres!")
+            return false;
+        }
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -92,19 +108,19 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
+
                     setTimeout(function () {
                         window.location = "index.html";
-                    }, 1000); // apenas para exibir o loading
-
+                    }, 1000);
                 });
 
             } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Email ou senha inválidos!";
+                console.log("Email ou senha inválidos!")
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
@@ -114,11 +130,6 @@
 
         return false;
     }
-
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
-
 </script>
 
 </html>

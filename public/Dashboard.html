@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/Dashboard-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container nav-content">
@@ -22,6 +25,47 @@
     </nav>
 
 
-    foto perso fav
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <img id="imgPersonagem">
+            <h3 id="nomePersonagem">Bem-Vindo <b>NOME</b></h3>
+            <a href="" class="link-favs">Personagens favoritos</a>
+        </aside>
+
+        <main class="dashboard">
+
+            <div class="kpis">
+                <div class="kpi-card">
+                    <h4>Vitórias</h4>
+                    <span id="vitorias">0</span>
+                </div>
+
+                <div class="kpi-card">
+                    <h4>Derrotas</h4>
+                    <span id="derrotas">0</span>
+                </div>
+            </div>
+
+            <div class="ranking">
+                <h4>Ranking</h4>
+                <p>Pontuação: <span id="pontuacao">0</span></p>
+
+                <div class="barra">
+                    <div id="progresso"></div>
+                </div>
+
+                <p id="winrate">Winrate: 0%</p>
+            </div>
+
+            <!-- <div class="grafico">
+                <h4>Desempenho</h4>
+                <canvas id="graficoBarra"></canvas>
+            </div> -->
+
+        </main>
+    </div>
+
 </body>
+
 </html>
