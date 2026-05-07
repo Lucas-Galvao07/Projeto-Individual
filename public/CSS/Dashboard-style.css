@@ -55,7 +55,7 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-    width: 28%;
+    width: 30%;
     background: #0d0d0d;
     padding: 20px;
     border-right: 3px solid rgba(0, 119, 255, 0.7);
@@ -83,7 +83,7 @@ body {
 
 /* DASHBOARD DIREITA */
 .dashboard {
-    width: 72%;
+    width: 70%;
     padding: 20px;
 }
 
@@ -119,20 +119,6 @@ body {
     font-weight: bold;
 }
 
-/* GRÁFICO */
-.grafico {
-    background: #1F1F1F;
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 20px;
-}
-
-.grafico h4 {
-    font-family: 'Black Han Sans', sans-serif;
-    color: #0077ff;
-    margin-bottom: 10px;
-}
-
 /* RANKING */
 .ranking {
     background: #1F1F1F;
@@ -161,8 +147,31 @@ body {
     transition: width 0.5s;
 }
 
-/* TEXTO EXTRA */
 #winrate {
     font-size: 14px;
     opacity: 0.8;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    background: #1F1F1F;
+    color: white;
+    border: 1px solid rgba(0, 119, 255, 0.5);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar button:hover {
+    background: #0077ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(0, 119, 255, 0.5);
+}
+
+.favoritos {
+    display: none;
+    width: 72.8%;
 }

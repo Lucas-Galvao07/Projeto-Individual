@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./js/sessao.js"></script>
     <link rel="stylesheet" href="CSS/Login-Cadastro-style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-
     <title>Login</title>
 </head>
 
@@ -27,7 +25,6 @@
     </nav>
 
     <div id="div_cadastro" class="box">
-
         <div class="esquerda-login"></div>
 
         <div class="direita">
@@ -44,91 +41,66 @@
             </div>
 
             <button onclick="entrar()">Logar</button>
+
+            <div id="cardErro"></div>
+            <div id="cardCerto"></div>
         </div>
-
-        <div id="cardErro" class="card-erro"></div>
-
     </div>
 </body>
 
 <script>
+    function mostrarErro(mensagem) {
+        cardErro.textContent = mensagem;
+        cardErro.style.display = 'block';
+        setTimeout(() => cardErro.style.display = 'none', 3000);
+    }
 
+    function mostrarCerto(mensagem) {
+        cardCerto.textContent = mensagem;
+        cardCerto.style.display = 'block';
+        setTimeout(() => cardCerto.style.display = 'none', 3000);
+    }
 
     function entrar() {
-        // aguardar();
+        var email = email_input.value.trim();
+        var senha = senha_input.value.trim();
 
-        var emailVar = email_input.value.trim();
-        var senhaVar = senha_input.value.trim();
-
-        // validação campos vazios
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Preencha todos os campos!";
-            console.log("Preencha todos os campos!")
-            return false;
+        if (email == '' || senha == '') {
+            mostrarErro('Preencha todos os campos!');
+            return;
         }
 
-        // validação básica de email
-        if (!emailVar.includes("@") || !emailVar.includes(".")) {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Email inválido!";
-            console.log("Email inválido!")
-            return false;
+        if (!email.includes('@') || !email.includes('.')) {
+            mostrarErro('Email inválido!');
+            return;
         }
 
-        // validação tamanho da senha
-        if (senhaVar.length < 6) {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Senha deve ter pelo menos 6 caracteres!";
-            console.log("Senha deve ter pelo menos 6 caracteres!")
-            return false;
+        if (senha.length < 6) {
+            mostrarErro('A senha deve ter pelo menos 6 caracteres!');
+            return;
         }
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-
-                    setTimeout(function () {
-                        window.location = "index.html";
-                    }, 1000);
-                });
-
-            } else {
-                cardErro.style.display = "block"
-                mensagem_erro.innerHTML = "Email ou senha inválidos!";
-                console.log("Email ou senha inválidos!")
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
+        fetch('/usuarios/autenticar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ emailServer: email, senhaServer: senha })
         })
-
-        return false;
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(function (dados) {
+                        sessionStorage.EMAIL_USUARIO = dados.email;
+                        sessionStorage.NOME_USUARIO = dados.nome;
+                        sessionStorage.ID_USUARIO = dados.id;
+                        mostrarCerto('Login realizado! Redirecionando...');
+                        setTimeout(() => window.location = 'index.html', 1500);
+                    });
+                } else {
+                    mostrarErro('Email ou senha inválidos!');
+                }
+            })
+            .catch(function () {
+                mostrarErro('Erro de conexão. Tente novamente.');
+            });
     }
 </script>
 

@@ -30,10 +30,11 @@
         <aside class="sidebar">
             <img id="imgPersonagem">
             <h3 id="nomePersonagem">Bem-Vindo <b>NOME</b></h3>
-            <a href="" class="link-favs">Personagens favoritos</a>
+            <button onclick="mostrarDashboard()">Dashboard</button>
+            <button onclick="mostrarFavoritos()">Personagens Favoritos</button>
         </aside>
 
-        <main class="dashboard">
+        <section class="dashboard" id="dashboard">
 
             <div class="kpis">
                 <div class="kpi-card">
@@ -58,14 +59,28 @@
                 <p id="winrate">Winrate: 0%</p>
             </div>
 
-            <!-- <div class="grafico">
-                <h4>Desempenho</h4>
-                <canvas id="graficoBarra"></canvas>
-            </div> -->
+        </section>
 
-        </main>
+        <section class="favoritos" id="favoritos">
+            ainda em design
+
+            <!-- Aqui vai ficar os cards de personagens favoritos que serão puxados do banco -->
+        </section>
     </div>
 
 </body>
+
+<script>
+    function mostrarFavoritos() {
+        dashboard.style.display = 'none';
+        favoritos.style.display = 'block';
+    }
+
+    function mostrarDashboard() {
+        dashboard.style.display = 'block';
+        favoritos.style.display = 'none';
+    }
+
+</script>
 
 </html>
