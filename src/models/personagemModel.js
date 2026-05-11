@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 // seleciona os personagens que irão aparecer na tela de personagens
-function buscarPersonagensFavoritos(idUsuario) {
+function buscarPersonagens(idUsuario) {
   var instrucaoSql = `
     SELECT
       p.idPersonagem id,
@@ -61,6 +61,7 @@ function buscarFavoritosParaJogo(idUsuario) {
   console.log("SQL buscarFavoritosParaJogo:\n" + instrucaoSql);
   return database.executar(instrucaoSql, [idUsuario]);
 }
+
 // aqui vai puxar só os ataques para o jogo
 function buscarAtaques() {
   var instrucaoSql = `
@@ -79,7 +80,7 @@ function buscarAtaques() {
 }
 
 module.exports = {
-  buscarPersonagensFavoritos,
+  buscarPersonagens,
   buscarPersonagemPorId,
   buscarFavoritosParaJogo,
   buscarAtaques,

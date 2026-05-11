@@ -69,15 +69,17 @@ body {
 .hero-conteudo span {
     color: red;
 }
+
 .hero-link {
     text-decoration: none;
 }
+
 .hero-btn {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-self: center;
-    
+
     background: red;
     color: white;
 
@@ -87,7 +89,7 @@ body {
     font-family: 'Black Han Sans', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 2px;
-    
+
     cursor: pointer;
     clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
     transition: all 0.2s;
@@ -122,6 +124,25 @@ body {
     margin-bottom: 40px;
 }
 
+.sobre-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.sobre-texto {
+    flex: 1;
+}
+
+.direita {
+    height: 300px;
+    width: auto;
+    border-radius: 8px;
+    margin-bottom: 150px;
+    flex-shrink: 0;
+    border: 2px solid #0077ff;
+    align-self: center;
+}
 /* ======================== LUTAS ======================== */
 
 .lutas-pag {
@@ -170,7 +191,6 @@ body {
     display: block;
 }
 
-/* hover azul */
 .luta-card:hover {
     transform: scale(1.03);
     border-color: rgba(0, 119, 255, 0.7);

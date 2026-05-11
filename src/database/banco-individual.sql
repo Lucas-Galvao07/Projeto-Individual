@@ -248,7 +248,8 @@ SELECT
     t.nome Tipo,
     t.dano Dano
 FROM ataque a
-JOIN tipo t on a.fktipo - t.idTipo;
+JOIN tipo t on a.fktipo = t.idTipo
+order by idAtaque;
 
 SELECT
 	p.idPersonagem id,
@@ -285,10 +286,9 @@ select
 	u.nome User, 
     p.nome Personagem,
     p.descricao Descricao
-from favorito f 
-join personagem p on idPersonagem = f.fkPersonagem
+	from favorito f 
+	join personagem p on idPersonagem = f.fkPersonagem
 join usuario u on idUsuario = f.fkUsuario;
-
 
 insert into favorito values 
 (1,2),

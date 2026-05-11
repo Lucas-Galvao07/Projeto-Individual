@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOH - Torneio</title>
+    <link rel="stylesheet" href="CSS/jogo.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <h2>GOH</h2>
+            <div class="nav_links">
+                <a href="index.html#Inicio" class="nav-ativo">Home</a>
+                <a href="index.html#Sobre">Sobre</a>
+                <a href="login.html" class="nav-login">Entrar</a>
+                <a href="cadastro.html" class="nav-cadastro">Cadastrar</a>
+                <a href="personagens.html" class="nav-logado">Personagens</a>
+                <a href="dashboard.html" class="nav-logado">Dashboard</a>
+                <a href="jogo.html" class="nav-logado">Jogo</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="arena">
+        <div class="card" id="card_jogador">
+            <h2 id="nome_jogador">Lucas</h2>
+            <div class="foto_container">⚔️</div>
+            <p class="hp_texto" id="hp_texto_jogador">HP: 350</p>
+            <div class="hp_barra_container">
+                <div class="hp_barra" id="hp_barra_jogador" style="width:100%"></div>
+            </div>
+        </div>
+
+        <span class="vs">VS</span>
+
+        <div class="card" id="card_inimigo">
+            <h2 id="nome_inimigo">???</h2>
+            <div class="foto_container" id="foto_inimigo">💀</div>
+            <p class="hp_texto" id="hp_texto_inimigo">HP: ???</p>
+            <div class="hp_barra_container">
+                <div class="hp_barra" id="hp_barra_inimigo" style="width:100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ataques" id="div_ataques"></div>
+    <div class="log" id="log"></div>
+    <div id="div_resultado"></div>
+
+
+</body>
+
+<script>
+    const hpJogadorTexto = document.getElementById('hp_texto_jogador');
+    const hpJogadorBarra = document.getElementById('hp_barra_jogador');
+    const nomeInimigo = document.getElementById('nome_inimigo');
+    const fotoInimigo = document.getElementById('foto_inimigo');
+    const hpInimigoTexto = document.getElementById('hp_texto_inimigo');
+    const hpInimigoBarra = document.getElementById('hp_barra_inimigo');
+    const divAtaques = document.getElementById('div_ataques');
+    const log = document.getElementById('log');
+    const divResultado = document.getElementById('div_resultado');
+
+    // ataques do usuário
+    const ataques = [
+        { nome: 'Soco', dano: 40, emoji: '👊', cooldown_max: 0 },
+        { nome: 'Chute', dano: 70, emoji: '🦵', cooldown_max: 2 },
+        { nome: 'Sequência', dano: 100, emoji: '🥊', cooldown_max: 3 },
+        { nome: 'Destruir', dano: 150, emoji: '💥', cooldown_max: 4 }
+    ];
+
+
+    const inimigos = [
+        { nome: 'Mira Yoo', vida: 150, vida_max: 150, foto: 'assets/imgs/Mira-Inimigo.jpg' },
+        { nome: 'Han Daewi', vida: 180, vida_max: 180, foto: 'assets/imgs/Daewi-Inimigo.jpg' },
+        { nome: 'Jegal Taek', vida: 260, vida_max: 260, foto: 'assets/imgs/Jegal-Inimigo.jpg' },
+        { nome: 'Park Il-Pyo', vida: 350, vida_max: 350, foto: 'assets/imgs/Ilpyo-Inimigo.jpg' },
+        { nome: 'Jin Mori', vida: 500, vida_max: 500, foto: 'assets/imgs/Jin-Inimigo.jpg' }
+    ];
+    // adicionar mais tarde
+    const auxiliares = [
+        { nome: 'defender', emoji: '🛡️' }
+    ];
+    let defendendo = false
+
+    const hp_max = 350;
+    let vida_jogador = hp_max;
+    let fase_atual = 0;
+    let jogo_ativo = true;
+    let inimigo_atual;
+
+    const cooldowns = {};
+    const btns_ataque = {};
+
+    ataques.forEach(a => cooldowns[a.nome] = 0);
+
+    function adicionar_log(texto) {
+        log.innerHTML += `<p>${texto}</p>`;
+        log.scrollTop = log.scrollHeight;
+    }
+
+    function atualizar_barra_hp(barra, vida_atual, vida_max) {
+        // impede que a barra fique negativa
+        const porcentagem = Math.max(0, (vida_atual / vida_max) * 100);
+        barra.style.width = `${porcentagem}%`;
+    }
+
+    function atualizar_btn(ataque) {
+        const btn = btns_ataque[ataque.nome];
+        if (!btn) return;
+
+        const cd = cooldowns[ataque.nome];
+        btn.disabled = cd > 0;
+
+        let badge = btn.querySelector('.cooldown_badge');
+        if (cd > 0) {
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'cooldown_badge';
+                btn.appendChild(badge);
+            }
+            badge.textContent = cd;
+        } else if (badge) {
+            badge.remove();
+        }
+    }
+
+    function processar_cooldowns() {
+        ataques.forEach(a => {
+            if (cooldowns[a.nome] > 0) cooldowns[a.nome]--;
+            atualizar_btn(a);
+        });
+    }
+
+    function carregar_inimigo() {
+        // clona a lista de inimigos para não alterar globalmente
+        inimigo_atual = { ...inimigos[fase_atual] };
+        nomeInimigo.textContent = inimigo_atual.nome;
+
+        fotoInimigo.innerHTML = `<img src="${inimigo_atual.foto}" alt="${inimigo_atual.nome}">`;
+
+        hpInimigoTexto.textContent = `HP: ${inimigo_atual.vida}`;
+        atualizar_barra_hp(hpInimigoBarra, inimigo_atual.vida, inimigo_atual.vida_max);
+    }
+
+    function mostrar_ataques() {
+        divAtaques.innerHTML = '';
+        ataques.forEach(ataque => {
+            const btn = document.createElement('button');
+
+            btn.innerHTML = `
+                    ${ataque.emoji} ${ataque.nome}
+                    <small>Dano: ${ataque.dano} | CD: ${ataque.cooldown_max} rodadas</small>
+                `;
+
+            btn.onclick = () => atacar(ataque);
+
+            divAtaques.appendChild(btn);
+            btns_ataque[ataque.nome] = btn;
+        });
+    }
+
+    function encerrar_jogo(mensagem) {
+        jogo_ativo = false;
+        divResultado.textContent = mensagem;
+        ataques.forEach(a => { if (btns_ataque[a.nome]) btns_ataque[a.nome].disabled = true; });
+    }
+
+    function atacar(ataque) {
+        if (!jogo_ativo) return;
+
+        inimigo_atual.vida -= ataque.dano;
+        adicionar_log(`⚔️ Você usou <strong>${ataque.nome}</strong> e causou ${ataque.dano} de dano!`);
+
+        hpInimigoTexto.textContent = `HP: ${Math.max(0, inimigo_atual.vida)}`;
+        atualizar_barra_hp(hpInimigoBarra, inimigo_atual.vida, inimigo_atual.vida_max);
+
+        if (ataque.cooldown_max > 0) {
+            cooldowns[ataque.nome] = ataque.cooldown_max;
+            atualizar_btn(ataque);
+        }
+
+        // Inimigo Derrotado
+        if (inimigo_atual.vida <= 0) {
+            adicionar_log(`🏆 Você derrotou <strong>${inimigo_atual.nome}</strong>!`);
+            fase_atual++;
+            // cura de hp quando inimigo for derrotado, antes era impossivel kk
+            if (vida_jogador < hp_max) {
+                vida_jogador += 30;
+                hpJogadorTexto.textContent = `HP: ${Math.max(0, vida_jogador)}`;
+                atualizar_barra_hp(hpJogadorBarra, vida_jogador, hp_max);
+            }
+
+            if (fase_atual >= inimigos.length) {
+                encerrar_jogo('🏆 VOCÊ VENCEU O TORNEIO!');
+            } else {
+                carregar_inimigo();
+                ataques.forEach(a => { cooldowns[a.nome] = 0; atualizar_btn(a); });
+                adicionar_log(`⚡ Fase ${fase_atual + 1}: Novo oponente se aproxima!`);
+            }
+            return;
+        }
+
+        // Turno do Inimigo
+        processar_cooldowns();
+        let dano_inimigo = 0;
+
+        for (let contador = 0; contador < 1; contador++) {
+            let atk_inimigo = Math.floor(Math.random() * 3 + 1);
+
+            if (atk_inimigo == 1) {
+                dano_inimigo = 20;
+            }
+
+            if (atk_inimigo == 2) {
+                dano_inimigo = 35;
+            }
+
+            if (atk_inimigo == 3) {
+                dano_inimigo = 50;
+            }
+
+            vida_jogador -= dano_inimigo;
+        }
+
+        hpJogadorTexto.textContent = `HP: ${Math.max(0, vida_jogador)}`;
+        atualizar_barra_hp(hpJogadorBarra, vida_jogador, hp_max);
+        adicionar_log(`💥 ${inimigo_atual.nome} atacou e causou ${dano_inimigo} de dano!`);
+
+        // Jogador Derrotado
+        if (vida_jogador <= 0) {
+            encerrar_jogo('💀 Fim de jogo! Você perdeu.');
+        }
+    }
+
+    mostrar_ataques();
+    carregar_inimigo();
+    adicionar_log('🥊 O torneio começou! Faça o seu movimento.');
+</script>
+
+</html>
