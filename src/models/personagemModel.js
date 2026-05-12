@@ -1,7 +1,6 @@
 var database = require("../database/config");
 
-// seleciona os personagens que irão aparecer na tela de personagens
-function buscarPersonagens(idUsuario) {
+function buscarPersonagens() {
   var instrucaoSql = `
     SELECT
       p.idPersonagem id,
@@ -9,24 +8,21 @@ function buscarPersonagens(idUsuario) {
       p.poder Poder,
       p.urlImg Imagem
     FROM personagem p
-    JOIN favorito f ON f.fkPersonagem = p.idPersonagem
-    WHERE f.fkUsuario = ?
-    ORDER BY p.nome;`;
+    ORDER BY p.idPersonagem;`;
 
-  console.log("SQL buscarPersonagensFavoritos:\n" + instrucaoSql);
-  return database.executar(instrucaoSql, [idUsuario]);
+  console.log("SQL buscarPersonagens:\n" + instrucaoSql);
+  return database.executar(instrucaoSql);
 }
 
-// seleciona o personagem clicado para mostrar mais informações
 function buscarPersonagemPorId(id) {
   var instrucaoSql = `
     SELECT
       p.idPersonagem  id,
       p.nome Personagem,
       p.poder Poder,
-      p.descricao Descricao,
       p.urlImg Imagem,
-      a.idAtaque,
+      p.descricao Descricao,
+      a.idAtaque idAtaque,
       a.nome Ataque,
       t.nome Tipo,
       t.dano Dano
@@ -40,40 +36,35 @@ function buscarPersonagemPorId(id) {
   return database.executar(instrucaoSql, [id]);
 }
 
-// seleciona o personagem favorito escolhido para jogar
-function buscarFavoritosParaJogo(idUsuario) {
+function buscarPersonagensFavoritos(idUsuario) {
   var instrucaoSql = `
     SELECT
-      p.idPersonagem id,
+      p.idPersonagem  id,
       p.nome Personagem,
+      p.urlImg Imagem,
       p.poder Poder,
-      a.idAtaque,
-      a.nome Ataque,
-      t.nome Tipo,
-      t.dano Dano
+      a.nome Ataque
     FROM personagem p
     JOIN favorito f ON f.fkPersonagem = p.idPersonagem
     JOIN ataque a ON a.fkPersonagem = p.idPersonagem
-    JOIN tipo t ON a.fkTipo = t.idTipo
     WHERE f.fkUsuario = ?
-    ORDER BY p.idPersonagem, a.idAtaque;`;
+    ORDER BY p.nome, a.nome;`;
 
-  console.log("SQL buscarFavoritosParaJogo:\n" + instrucaoSql);
+  console.log("SQL buscarPersonagensFavoritos:\n" + instrucaoSql);
   return database.executar(instrucaoSql, [idUsuario]);
 }
 
-// aqui vai puxar só os ataques para o jogo
 function buscarAtaques() {
   var instrucaoSql = `
     SELECT
-      a.idAtaque,
+      p.nome Personagem,
+      p.urlImg Imagem,
       a.nome Ataque,
-      t.idTipo,
-      t.nome Tipo,
       t.dano Dano
-    FROM ataque a
+    FROM personagem p
+    JOIN ataque a ON a.fkPersonagem = p.idPersonagem
     JOIN tipo t ON a.fkTipo = t.idTipo
-    ORDER BY t.nome, a.nome;`;
+    ORDER BY p.nome, a.nome;`;
 
   console.log("SQL buscarAtaques:\n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -82,6 +73,6 @@ function buscarAtaques() {
 module.exports = {
   buscarPersonagens,
   buscarPersonagemPorId,
-  buscarFavoritosParaJogo,
+  buscarPersonagensFavoritos,
   buscarAtaques,
 };

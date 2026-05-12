@@ -3,17 +3,20 @@ var router = express.Router();
 
 var personagemController = require("../controllers/personagemController");
 
-router.post("/personagens", function (req, res) {
-    personagemController.cadastrar(req, res);
-})
+router.get("/personagens", function (req, res) {
+    personagemController.buscarTodosPersonagens(req, res);
+});
 
+router.get("/personagens/favoritos/:idUsuario", function (req, res) {
+    personagemController.buscarPersonagensFavoritos(req, res);
+});
 
+router.get("/personagens/:id", function (req, res) {
+    personagemController.buscarPersonagemPorId(req, res);
+});
 
-
-
-
-
-// Ainda em produção essa parte
-
+router.get("/ataques", function (req, res) {
+    personagemController.buscarAtaques(req, res);
+});
 
 module.exports = router;

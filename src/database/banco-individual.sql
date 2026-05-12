@@ -65,20 +65,20 @@ INSERT INTO personagem (nome, poder, descricao, urlImg) VALUES
 -- ALIADOS / IMPORTANTES
 ('Jin Taejin', 'Re: Taekwondo', 'Avô adotivo de Jin Mori e o criador do Taekwondo Renovado. Uma lenda viva cujo treinamento militar de artes marciais lhe concedeu força capaz de rivalizar com deuses sem usar nenhum poder emprestado (Charyeok).', 'https://static.wikia.nocookie.net/godofhighschool/images/6/6c/Jin_Taejin.png/revision/latest/scale-to-width-down/1000?cb=20200914153935'),
 
-('Park Ilpyo', 'Raposa de Nove Caudas', 'Lutador calculista que utiliza o Ssam-Su Taekkyeon e é recipiente da Raposa de Nove Caudas (Hojosa), sendo uma das "Chaves" do mundo e possuindo o poder de manipular chamas místicas.', 'https://static.wikia.nocookie.net/godofhighschool/images/8/88/2018-12-26_%287%29.png/revision/latest?cb=20181226041826'),
+('Park Ilpyo', 'Raposa de Nove Caudas', 'Lutador calculista que utiliza o Ssam-Su Taekkyeon e é recipiente da Raposa de Nove Caudas (Hojosa), sendo uma das "Chaves" do mundo e possuindo o poder de manipular chamas místicas.', 'assets/imgs/IlPyo-Inimigo.jpg'),
 
-('Lee Sujin', 'Artes Marciais', 'Reencarnação de Pandora (também uma "Chave") e mestre do Taekwondo ITF do Norte, possuindo controle sobre o ambiente, reflexão de ataques físicos e a habilidade de conjurar doenças.', 'https://static.wikia.nocookie.net/godofhighschool/images/8/81/2018-12-26_%285%29.png/revision/latest?cb=20181226040704'),
+('Lee Sujin', 'Artes Marciais', 'Reencarnação de Pandora (também uma "Chave") e mestre do Taekwondo ITF do Norte, possuindo controle sobre o ambiente, reflexão de ataques físicos e a habilidade de conjurar doenças.', 'assets/imgs/Lee-Sujin.png'),
 
 ('Baek Seungchul', 'Oxen King', 'Lutador genial armado com um taco de beisebol que usa cálculos matemáticos durante os combates e assina um contrato com o Charyeok do Rei Touro (Gyumaoh) para golpes físicos brutais e manipulação de raios.', 'https://i.pinimg.com/736x/be/a3/15/bea315cde6c60ccdf75793a2c2a68b54.jpg'),
 
 -- ORGANIZAÇÃO (EXECUTIVOS)
 ('Executivo Q', 'Jokes', 'Juiz do torneio GOH que utiliza cartas de baralho como armas cortantes explosivas e invoca o Charyeok "Joker", um ser demoníaco impiedoso armado com uma foice.', 'https://static.wikia.nocookie.net/godofhighschool/images/9/93/IMG_3135.jpeg/revision/latest?cb=20200813150038'),
 
-('Executivo O', 'Dragon Slayer', 'Juiz leal a Mubong que atua como domador de dragões através de seu Charyeok "Dragão Vermelho" (Choi Changsik), conseguindo conjurar escudos de chamas, voar e atacar com baforadas de fogo.', 'https://static.wikia.nocookie.net/godofhighschool/images/2/2e/Judge_O_Double_Dragon.jpg/revision/latest?cb=20170516154208'),
+('Executivo O', 'Dragon Slayer', 'Juiz leal a Mubong que atua como domador de dragões através de seu Charyeok "Dragão Vermelho" (Choi Changsik), conseguindo conjurar escudos de chamas, voar e atacar com baforadas de fogo.', 'assets/imgs/Executivo-O.png'),
 
 ('Executivo P', 'Marionette', 'Juíza e estrategista que utiliza o Charyeok "Marionete", permitindo que ela crie fios para controlar o corpo de aliados e inimigos, imobilizar ameaças ou costurar ferimentos.', 'https://static.wikia.nocookie.net/godofhighschool/images/8/8d/TGOH_-_CH069_-_Judge_P.png/revision/latest?cb=20140731111645'),
 
-('Executivo S', 'Paladino de Siegfried', 'Juiz sub-líder que possui imensa resistência física e usa o Charyeok "Paladino/Siegfried", portando a mítica espada Walmung, invocando raios e curando aliados.', 'https://static.wikia.nocookie.net/godofhighschool/images/2/21/Sacred_Sword_Walmung.jpg/revision/latest?cb=20130816095259'),
+('Executivo S', 'Paladino de Siegfried', 'Juiz sub-líder que possui imensa resistência física e usa o Charyeok "Paladino/Siegfried", portando a mítica espada Walmung, invocando raios e curando aliados.', 'assets/imgs/Executivo-S.png'),
 
 ('Executivo T', 'Ascalon', 'Juiz cego e locutor oficial do torneio GOH. É um habilidoso mestre espadachim que usa um estilo de combate com cortes ágeis e precisos para compensar a sua falta de visão.', 'https://static.wikia.nocookie.net/godofhighschool/images/b/b3/Shim_Bong-Sa.jpg/revision/latest?cb=20120602035203'),
 
@@ -90,7 +90,7 @@ INSERT INTO personagem (nome, poder, descricao, urlImg) VALUES
 ('Ogre', 'Grande Mestre do Bastão Bo', 'Antiga deusa dragão (Dragão dos Ossos) do Reino Celestial. Apresenta uma aparência grotesca/bizarra utilizando correntes e dentes, detendo uma imensa resistência e força mágica.', 'https://static.wikia.nocookie.net/godofhighschool/images/7/70/Ogre_dragon.jpg/revision/latest?cb=20211018011526'),
 
 -- VILÕES
-('Park Mubong', 'Longinus', 'Criador do torneio GOH e figura altamente ambiciosa que manipula a gravidade a níveis extremos através de seu Charyeok em formato de cruz, a "Mão de Longinus".', 'https://static.wikia.nocookie.net/godofhighschool/images/c/c4/Yeet.PNG/revision/latest/scale-to-width-down/1000?cb=20200911014530'),
+('Park Mubong', 'Longinus', 'Criador do torneio GOH e figura altamente ambiciosa que manipula a gravidade a níveis extremos através de seu Charyeok em formato de cruz, a "Mão de Longinus".', 'assets/imgs/Park-Mubong.png'),
 
 ('R', 'Ganância Original', 'Juiz misterioso que posteriormente se torna o Bispo Ultio R. Possui o raríssimo poder de manipular o vento e de absorver, armazenar e usar múltiplos Charyeoks tomados de outras pessoas.', 'https://static.wikia.nocookie.net/godofhighschool/images/e/e2/R%27sBow.png/revision/latest?cb=20131004153259'),
 
@@ -290,7 +290,8 @@ select
 	join personagem p on idPersonagem = f.fkPersonagem
 join usuario u on idUsuario = f.fkUsuario;
 
-insert into favorito values 
+/* insert into favorito values 
 (1,2),
 (1,3),
 (1,4);
+*/

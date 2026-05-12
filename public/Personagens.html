@@ -53,24 +53,41 @@
 
         <div id="containerPersonagens" class="grid-personagens">
             <!-- personagens vêm do banco via JS -->
-            <div class="card-personagem">
-
-                <img src="assets/imgs/Jin-Painel.jpg" class="img-personagem">
-
-                <h2 class="nome-personagem">Jin Mori</h2>
-
-                <p class="poder-personagem">Nirvana</p>
-
-                <!-- ações -->
-                <div class="acoes-personagem">
-                    <button class="btn-favoritar">⭐</button>
-                    <button class="btn-usar">Usar</button>
-                </div>
-
-            </div>
         </div>
 
     </div>
 </body>
+
+<script>
+    function buscarPersonagens() {
+        fetch("/personagens")
+            .then((resposta) => resposta.json())
+            .then((personagens) => {
+
+                var container = document.getElementById("containerPersonagens");
+                container.innerHTML = "";
+
+                personagens.forEach((personagem) => {
+                    container.innerHTML += `
+                    <div class="card-personagem">
+                        <img src="${personagem.Imagem}" class="img-personagem" alt="${personagem.Personagem}">
+                        <h2 class="nome-personagem">${personagem.Personagem}</h2>
+                        <p class="poder-personagem">${personagem.Poder}</p>
+                        <div class="acoes-personagem">
+                            <button class="btn-favoritar" onclick="favoritar(${personagem.id})">⭐</button>
+                            <button class="btn-usar" onclick="usarPersonagem(${personagem.id})">Usar</button>
+                        </div>
+                    </div>
+                `;
+                });
+
+            })
+            .catch((erro) => {
+                console.error("Erro ao buscar personagens:", erro);
+            });
+    }
+
+    buscarPersonagens();
+</script>
 
 </html>

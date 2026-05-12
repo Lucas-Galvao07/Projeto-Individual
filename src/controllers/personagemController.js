@@ -1,53 +1,62 @@
-var personagemModel = require("../models/personagemModel")
+var personagemModel = require("../models/personagemModel");
 
-function buscarPersonagens(req, res) {
+function buscarTodosPersonagens(req, res) {
     personagemModel.buscarPersonagens()
         .then((resultado) => {
             res.json(resultado);
         })
-
         .catch((erro) => {
-            console.error("Erro ao buscar os personagens:", erro)
+            console.error("Erro ao buscar todos os personagens:", erro);
             res.status(500).json({ erro: erro.sqlMessage });
-        })
+        });
 }
 
 function buscarPersonagemPorId(req, res) {
-    personagemModel.buscarPersonagemPorId()
-        .then((resultado) => {
-            res.json(resultado)
-        })
+    var id = req.params.id;
 
-        .catch((erro) => {
-            console.error("Erro ao Buscar personagem por id:", erro)
-            res.status(500).json({ erro: erro.sqlMessage })
+    personagemModel.buscarPersonagemPorId(id)
+        .then((resultado) => {
+            if (resultado.length === 0) {
+                return res.status(404).json({ mensagem: "Personagem não encontrado." });
+            }
+            res.json(resultado);
         })
+        .catch((erro) => {
+            console.error("Erro ao buscar personagem por id:", erro);
+            res.status(500).json({ erro: erro.sqlMessage });
+        });
 }
 
-function buscarFavoritosParaJogo(req, res) {
-    personagemModel.buscarFavoritosParaJogo()
+function buscarPersonagensFavoritos(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    personagemModel.buscarPersonagensFavoritos(idUsuario)
         .then((resultado) => {
-            res.json(resultado)
+            if (resultado.length === 0) {
+                return res.status(404).json({ mensagem: "Nenhum favorito encontrado para este usuário." });
+            }
+            res.json(resultado);
         })
         .catch((erro) => {
-            console.error("Erro ao Buscar os personagens:", erro)
-            res.status(500).json({ erro: erro.sqlMessage })
-        })
+            console.error("Erro ao buscar personagens favoritos:", erro);
+            res.status(500).json({ erro: erro.sqlMessage });
+        });
 }
 
 function buscarAtaques(req, res) {
     personagemModel.buscarAtaques()
         .then((resultado) => {
-            res.json(resultado)
+            res.json(resultado);
         })
         .catch((erro) => {
-            console.error("Erro ao Buscar os ataques:", erro)
-            res.status(500).json({ erro: erro.sqlMessage })
-        })
+            console.error("Erro ao buscar ataques:", erro);
+            res.status(500).json({ erro: erro.sqlMessage });
+        });
 }
+
 module.exports = {
-    buscarPersonagens,
+    buscarTodosPersonagens,
     buscarPersonagemPorId,
-    buscarFavoritosParaJogo,
+    buscarPersonagensFavoritos,
     buscarAtaques,
 };
