@@ -49,11 +49,9 @@ body {
 .dashboard-container {
     display: flex;
     margin-top: 90px;
-    /* compensar navbar fixa */
     width: 100%;
 }
 
-/* SIDEBAR */
 .sidebar {
     width: 30%;
     background: #0d0d0d;
@@ -81,13 +79,11 @@ body {
     line-height: 1.5;
 }
 
-/* DASHBOARD DIREITA */
 .dashboard {
     width: 70%;
     padding: 20px;
 }
 
-/* KPIs */
 .kpis {
     display: flex;
     gap: 20px;
@@ -174,4 +170,91 @@ body {
 .favoritos {
     display: none;
     width: 72.8%;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    justify-content: center;
+}
+
+.card-personagem {
+    background: var(--color-background-primary);
+    border-radius: var(--border-radius-lg);
+    border: 2px solid #7F77DD;
+    box-shadow: inset 0 0 0 4px var(--color-background-primary), inset 0 0 0 6px #AFA9EC;
+    width: 220px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 1.25rem;
+}
+
+.card-personagem img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+    border-bottom: 2px solid #7F77DD;
+}
+
+.card-personagem h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 1rem 0 0.25rem;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.card-personagem .poder {
+    font-size: 12px;
+    color: #534AB7;
+    background: #EEEDFE;
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin: 0 0 0.75rem;
+    font-weight: 500;
+}
+
+.card-personagem .ataques {
+    list-style: none;
+    padding: 0.75rem 1rem 0;
+    margin: 0 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 0.5px solid #AFA9EC;
+}
+
+.card-personagem .ataques li {
+    font-size: 12px;
+    color: #888;
+    padding: 3px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-personagem .ataques li span {
+    color: #534AB7;
+    font-weight: 500;
+}
+
+.card-personagem button {
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 500;
+    background: #EEEDFE;
+    color: #3C3489;
+    border: 1px solid #AFA9EC;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.card-personagem button:hover {
+    background: #CECBF6;
 }

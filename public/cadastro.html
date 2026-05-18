@@ -15,11 +15,11 @@
       <div class="nav-links">
         <a href="index.html#Inicio" class="nav-ativo">Home</a>
         <a href="index.html#Sobre">Sobre</a>
-        <a href="login.html" class="nav-login">Entrar</a>
-        <a href="cadastro.html" class="nav-cadastro">Cadastrar</a>
         <a href="personagens.html" class="nav-logado">Personagens</a>
-        <a href="dashboard.html" class="nav-logado">Dashboard</a>
-        <a href="jogo.html" class="nav-logado">Jogo</a>
+        <a href="login.html" class="nav-login" id="login">Entrar</a>
+        <a href="cadastro.html" class="nav-cadastro" id="cadastro">Cadastrar</a>
+        <a href="dashboard.html" class="nav-logado" id="dash">Dashboard</a>
+        <a href="jogo.html" class="nav-logado" id="jogo">Jogo</a>
       </div>
     </div>
   </nav>
@@ -59,6 +59,15 @@
 </body>
 
 <script>
+
+  var idUsuario = sessionStorage.getItem("ID_USUARIO")
+  jogo.style.display = 'none'
+  dash.style.display = 'none'
+
+  if (idUsuario >= 1) {
+    window.location = 'dashboard.html'
+  }
+
   function mostrarErro(mensagem) {
     cardErro.textContent = mensagem;
     cardErro.style.display = "block";

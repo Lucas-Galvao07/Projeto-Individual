@@ -263,7 +263,7 @@ FROM personagem p
 JOIN favorito f ON f.fkPersonagem = p.idPersonagem
 JOIN ataque a ON a.fkPersonagem = p.idPersonagem
 JOIN tipo t ON a.fkTipo = t.idTipo
-WHERE p.idPersonagem = 1
+WHERE f.fkPersonagem
 ORDER BY p.idPersonagem, a.idAtaque;
 
 SELECT
@@ -285,13 +285,40 @@ ORDER BY a.idAtaque;
 select 
 	u.nome User, 
     p.nome Personagem,
-    p.descricao Descricao
+    p.descricao Descricao,
+    a.nome Ataque,
+    t.dano Dano
 	from favorito f 
-	join personagem p on idPersonagem = f.fkPersonagem
+JOIN personagem p on idPersonagem = f.fkPersonagem
+JOIN ataque a ON a.fkPersonagem = p.idPersonagem
+JOIN tipo t ON a.fkTipo = t.idTipo
 join usuario u on idUsuario = f.fkUsuario;
 
-/* insert into favorito values 
+insert into favorito values 
 (1,2),
 (1,3),
 (1,4);
-*/
+
+SELECT
+	u.nome Nome,
+	u.vitorias Vitorias,
+    u.derrotas Derrotas,
+    p.idPersonagem id,
+    p.nome Personagem,
+    p.poder Poder,
+    p.descricao Descricao,
+    p.urlImg Imagem
+FROM usuario u
+JOIN favorito f ON f.fkUsuario = u.idUsuario
+JOIN personagem p ON p.idPersonagem = f.fkPersonagem
+WHERE u.idUsuario = 1
+ORDER BY p.idPersonagem;
+SELECT 
+        idUsuario,
+        vitorias,
+        derrotas
+    FROM usuario
+    WHERE idUsuario = 1;
+
+UPDATE usuario SET vitorias = ? WHERE idUsuario = ?;
+UPDATE usuario SET derrotas = ? WHERE idUsuario = ?;

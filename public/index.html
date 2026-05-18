@@ -15,11 +15,11 @@
             <div class="nav-links">
                 <a href="index.html#Inicio" class="nav-ativo">Home</a>
                 <a href="index.html#Sobre">Sobre</a>
-                <a href="login.html" class="nav-login">Entrar</a>
-                <a href="cadastro.html" class="nav-cadastro">Cadastrar</a>
                 <a href="personagens.html" class="nav-logado">Personagens</a>
-                <a href="dashboard.html" class="nav-logado">Dashboard</a>
-                <a href="jogo.html" class="nav-logado">Jogo</a>
+                <a href="login.html" class="nav-login" id="login">Entrar</a>
+                <a href="cadastro.html" class="nav-cadastro" id="cadastro">Cadastrar</a>
+                <a href="dashboard.html" class="nav-logado" id="dash">Dashboard</a>
+                <a href="jogo.html" class="nav-logado" id="jogo">Jogo</a>
             </div>
         </div>
     </nav>
@@ -34,35 +34,39 @@
     </section>
 
     <!-- SOBRE -->
-<section class="sobre-pag" id="Sobre">
-    <div class="container">
-        <div class="sobre-content">
-            <div class="sobre-texto">
-                <h2>Sobre a Obra</h2>
-                <p>
-                    The God of Highschool é um manhwa sul-coreano escrito e ilustrado por Yongje Park.
-                    A história acompanha Jin Mori, um especialista em Re:Taekwondo que participa de um torneio épico chamado
-                    "The God of Highschool" onde lutadores de todo o mundo competem.
-                    <br>
-                    O torneio promete realizar qualquer desejo do vencedor, atraindo lutadores com habilidades
-                    extraordinárias. À medida que a competição avança, segredos sobre poderes sobrenaturais chamados
-                    "Charyeok", divindades antigas e conspirações governamentais são revelados.
-                    <br>
-                    Com combates intensos, personagens carismáticos e uma narrativa que mistura artes marciais com
-                    mitologia, The God of Highschool se tornou um fenômeno global, ganhando adaptação em anime e
-                    conquistando milhões de fãs ao redor do mundo.
-                </p>
+    <section class="sobre-pag" id="Sobre">
+        <div class="container">
+            <div class="sobre-content">
+                <div class="sobre-texto">
+                    <h2>Sobre a Obra</h2>
+                    <p>
+                        The God of Highschool é um manhwa sul-coreano escrito e ilustrado por Yongje Park.
+                        A história acompanha Jin Mori, um especialista em Re:Taekwondo que participa de um torneio épico
+                        chamado
+                        "The God of Highschool" onde lutadores de todo o mundo competem.
+                        <br>
+                        O torneio promete realizar qualquer desejo do vencedor, atraindo lutadores com habilidades
+                        extraordinárias. À medida que a competição avança, segredos sobre poderes sobrenaturais chamados
+                        "Charyeok", divindades antigas e conspirações governamentais são revelados.
+                        <br>
+                        Com combates intensos, personagens carismáticos e uma narrativa que mistura artes marciais com
+                        mitologia, The God of Highschool se tornou um fenômeno global, ganhando adaptação em anime e
+                        conquistando milhões de fãs ao redor do mundo.
+                    </p>
 
-                <h2>Sobre o Projeto</h2>
-                <p>Este projeto foi desenvolvido com o objetivo de reunir informações sobre a obra The God of High School de
-                    forma organizada e interativa. A proposta é criar um site que facilite o acesso ao conteúdo para fãs e
-                    novos usuários, utilizando tecnologias web para proporcionar uma boa experiência de navegação.</p>
+                    <h2>Sobre o Projeto</h2>
+                    <p>Este projeto foi desenvolvido com o objetivo de reunir informações sobre a obra The God of High
+                        School de
+                        forma organizada e interativa. A proposta é criar um site que facilite o acesso ao conteúdo para
+                        fãs e
+                        novos usuários, utilizando tecnologias web para proporcionar uma boa experiência de navegação.
+                    </p>
+                </div>
+
+                <img src="assets/imgs/Criador.jpg" alt="" class="direita">
             </div>
-
-            <img src="assets/imgs/Criador.jpg" alt="" class="direita">
         </div>
-    </div>
-</section>
+    </section>
     <!-- LUTAS -->
     <section class="lutas-pag">
         <div class="container">
@@ -89,3 +93,16 @@
     </footer>
 
 </body>
+
+<script>
+    var idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+    if (idUsuario == undefined) {
+        dash.style.display = 'none'
+        jogo.style.display = 'none'
+    }
+    if (idUsuario >= 1) {
+        login.style.display = 'none'
+        cadastro.style.display = 'none'
+    }
+</script>

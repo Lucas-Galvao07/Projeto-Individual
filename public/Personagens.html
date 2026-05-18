@@ -15,11 +15,11 @@
             <div class="nav-links">
                 <a href="index.html#Inicio" class="nav-ativo">Home</a>
                 <a href="index.html#Sobre">Sobre</a>
-                <a href="login.html" class="nav-login">Entrar</a>
-                <a href="cadastro.html" class="nav-cadastro">Cadastrar</a>
-                <a href="#inicio" class="nav-logado">Personagens</a>
-                <a href="dashboard.html" class="nav-logado">Dashboard</a>
-                <a href="jogo.html" class="nav-logado">Jogo</a>
+                <a href="personagens.html" class="nav-logado">Personagens</a>
+                <a href="login.html" class="nav-login" id="login">Entrar</a>
+                <a href="cadastro.html" class="nav-cadastro" id="cadastro">Cadastrar</a>
+                <a href="dashboard.html" class="nav-logado" id="dash">Dashboard</a>
+                <a href="jogo.html" class="nav-logado" id="jogo">Jogo</a>
             </div>
         </div>
     </nav>
@@ -33,22 +33,8 @@
 
         <div class="descricao-personagens">
             <h3>
-                Explore os personagens disponíveis e escolha seu favorito para batalhar.
+                Salve seus personagens favoritos para usá-los em combate.
             </h3>
-        </div>
-
-        <div class="filtros-personagens">
-
-            <!-- filtro por organização -->
-            <div class="select-box">
-                <select id="selectOrganizacao" class="filtro-organizacao">
-                    <option value="">Todas as Organizações</option>
-                </select>
-            </div>
-
-            <!-- filtro por nome, sla, se der talvez fique daora-->
-            <input type="text" id="val_BuscaPersonagem" class="input-busca" placeholder="Buscar personagem...">
-
         </div>
 
         <div id="containerPersonagens" class="grid-personagens">
@@ -59,6 +45,19 @@
 </body>
 
 <script>
+
+    var idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+    if (idUsuario == undefined) {
+        jogo.style.display = 'none'
+        dash.style.display = 'none'
+    }
+
+    if (idUsuario >= 1) {
+        login.style.display = 'none'
+        cadastro.style.display = 'none'
+    }
+
     function buscarPersonagens() {
         fetch("/personagens")
             .then((resposta) => resposta.json())
@@ -74,8 +73,7 @@
                         <h2 class="nome-personagem">${personagem.Personagem}</h2>
                         <p class="poder-personagem">${personagem.Poder}</p>
                         <div class="acoes-personagem">
-                            <button class="btn-favoritar" onclick="favoritar(${personagem.id})">⭐</button>
-                            <button class="btn-usar" onclick="usarPersonagem(${personagem.id})">Usar</button>
+                            <button class="btn-favoritar" onclick="favoritar(${personagem.id})">Favoritar⭐</button>
                         </div>
                     </div>
                 `;
@@ -85,6 +83,23 @@
             .catch((erro) => {
                 console.error("Erro ao buscar personagens:", erro);
             });
+    }
+
+    function favoritar(idPersonagem) {
+        var idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+        if (!idUsuario) {
+            alert("Você precisa estar logado para favoritar!");
+            window.location.href = "login.html";
+            return;
+        }
+
+        fetch(`/personagens/${idPersonagem}/favoritar/${idUsuario}`, {
+            method: "POST"
+        })
+            .then((res) => res.json())
+            .then(() => alert("Personagem favoritado!"))
+            .catch((erro) => console.error("Erro ao favoritar:", erro));
     }
 
     buscarPersonagens();

@@ -70,9 +70,19 @@ function buscarAtaques() {
   return database.executar(instrucaoSql);
 }
 
+function adicionarFavorito(idUsuario, idPersonagem) {
+  var instrucaoSql = `
+    INSERT INTO favorito (fkUsuario, fkPersonagem)
+    VALUES (?, ?);`;
+
+  console.log("SQL adicionarFavorito:\n" + instrucaoSql);
+  return database.executar(instrucaoSql, [idUsuario, idPersonagem]);
+}
+
 module.exports = {
   buscarPersonagens,
   buscarPersonagemPorId,
   buscarPersonagensFavoritos,
   buscarAtaques,
+  adicionarFavorito
 };

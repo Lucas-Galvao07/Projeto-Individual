@@ -54,9 +54,23 @@ function buscarAtaques(req, res) {
         });
 }
 
+function adicionarFavorito(req, res) {
+  var idUsuario    = req.params.idUsuario;
+  var idPersonagem = req.params.idPersonagem;
+
+  personagemModel.adicionarFavorito(idUsuario, idPersonagem)
+    .then((resultado) => {
+      res.json({ mensagem: "Personagem favoritado com sucesso!" });
+    })
+    .catch((erro) => {
+      console.error("Erro ao favoritar personagem:", erro);
+      res.status(500).json({ erro: erro.sqlMessage });
+    });
+}
 module.exports = {
     buscarTodosPersonagens,
     buscarPersonagemPorId,
     buscarPersonagensFavoritos,
     buscarAtaques,
+    adicionarFavorito
 };

@@ -16,8 +16,8 @@
             <div class="nav-links">
                 <a href="index.html#Inicio" class="nav-ativo">Home</a>
                 <a href="index.html#Sobre">Sobre</a>
-                <a href="login.html" class="nav-login">Entrar</a>
-                <a href="cadastro.html" class="nav-cadastro">Cadastrar</a>
+                <a href="login.html" class="nav-login" id="login">Entrar</a>
+                <a href="cadastro.html" class="nav-cadastro" id="cadastro">Cadastrar</a>
                 <a href="personagens.html" class="nav-logado">Personagens</a>
                 <a href="dashboard.html" class="nav-logado">Dashboard</a>
                 <a href="jogo.html" class="nav-logado">Jogo</a>
@@ -33,6 +33,7 @@
             <h3 id="nomePersonagem">Bem-Vindo <b>NOME</b></h3>
             <button onclick="mostrarDashboard()">Dashboard</button>
             <button onclick="mostrarFavoritos()">Personagens Favoritos</button>
+            <button onclick="limparSessao()">Sair</button>
         </aside>
 
         <section class="dashboard" id="dashboard">
@@ -50,7 +51,7 @@
             </div>
 
             <div class="ranking">
-                <h4>Ranking</h4>
+                <h4 id="ranque">Ranking: </h4>
                 <p>Pontuação: <span id="pontuacao">0</span></p>
 
                 <div class="barra">
@@ -63,25 +64,131 @@
         </section>
 
         <section class="favoritos" id="favoritos">
-            ainda em design
-
-            <!-- Aqui vai ficar os cards de personagens favoritos que serão puxados do banco -->
+            <div id="cards-favoritos" class="cards-container">
+                <!-- Cards gerados pelo JS -->
+            </div>
         </section>
     </div>
 
 </body>
 
 <script>
+    var idUsuario = sessionStorage.getItem("ID_USUARIO")
+    if (idUsuario == undefined) {
+        window.location = 'login.html'
+    }
+    if (idUsuario >= 1) {
+        login.style.display = 'none'
+        cadastro.style.display = 'none'
+    }
+
+    fetch(`/dashboard/${idUsuario}`)
+        .then((res) => res.json())
+        .then((dados) => {
+            var usuario = dados[0];
+
+            document.getElementById("nomePersonagem").innerHTML =
+                "Bem-Vindo <b>" + usuario.Nome + "</b>";
+
+            document.getElementById("vitorias").textContent = usuario.Vitorias;
+            document.getElementById("derrotas").textContent = usuario.Derrotas;
+
+            var total = usuario.Vitorias + usuario.Derrotas;
+            var winrate = total > 0 ? ((usuario.Vitorias / total) * 100).toFixed(1) : 0;
+            var rank = ''
+            var pontuacao = usuario.Vitorias * 100 - usuario.Derrotas * 200;
+            if (isNaN(pontuacao)) {
+                pontuacao = 0
+            }
+            if (pontuacao <= 200) {
+                rank = 'Bronze'
+            }
+            else if (pontuacao <= 500) {
+                rank = 'Prata'
+            }
+            else if (pontuacao <= 750) {
+                rank = 'Ouro'
+            }
+            else if (pontuacao <= 1000) {
+                rank = 'Diamante'
+            }
+            else if (pontuacao <= 1500) {
+                rank = 'Mestre'
+            }
+            else {
+                rank = 'Nirvana'
+            }
+            document.getElementById("pontuacao").textContent = pontuacao;
+            document.getElementById("winrate").textContent = "Winrate: " + winrate + "%";
+            document.getElementById("progresso").style.width = winrate + "%";
+            ranque.innerHTML += rank
+        })
+        .catch((erro) => console.error("Erro ao buscar info do usuário:", erro));
+
+    fetch(`/dashboard/${idUsuario}/favoritos`)
+        .then((res) => res.json())
+        .then((dados) => {
+            var personagens = {};
+            dados.forEach((linha) => {
+                if (!personagens[linha.id]) {
+                    personagens[linha.id] = {
+                        id: linha.id,
+                        nome: linha.Personagem,
+                        poder: linha.Poder,
+                        imagem: linha.Imagem,
+                        ataques: [],
+                    };
+                }
+                personagens[linha.id].ataques.push({
+                    nome: linha.Ataque,
+                    tipo: linha.Tipo,
+                    dano: linha.Dano,
+                });
+            });
+
+            var container = document.getElementById("cards-favoritos");
+            container.innerHTML = "";
+
+            Object.values(personagens).forEach((p) => {
+                var ataquesHtml = p.ataques.map((a) => `
+                    <li>${a.nome} — <span>${a.tipo} (${a.dano} dmg)</span></li>
+                `).join("");
+
+                var card = `
+                    <div class="card-personagem">
+                        <img src="${p.imagem}" alt="${p.nome}">
+                        <h3>${p.nome}</h3>
+                        <p class="poder">${p.poder}</p>
+                        <ul class="ataques">${ataquesHtml}</ul>
+                        <button onclick="selecionarPersonagem(${p.id})">
+                            Jogar com ${p.nome}
+                        </button>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        })
+        .catch((erro) => console.error("Erro ao buscar favoritos:", erro));
+
+    function selecionarPersonagem(idPersonagem) {
+        localStorage.setItem("personagemSelecionado", idPersonagem);
+        window.location.href = "jogo.html";
+    }
+
     function mostrarFavoritos() {
-        dashboard.style.display = 'none';
-        favoritos.style.display = 'block';
+        document.getElementById("dashboard").style.display = "none";
+        document.getElementById("favoritos").style.display = "block";
     }
 
     function mostrarDashboard() {
-        dashboard.style.display = 'block';
-        favoritos.style.display = 'none';
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("favoritos").style.display = "none";
     }
 
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../login.html";
+    }
 </script>
 
 </html>
