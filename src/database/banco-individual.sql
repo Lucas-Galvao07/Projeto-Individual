@@ -5,10 +5,10 @@ USE gaia;
 -- USUARIO
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45), -- just the basics
+nome VARCHAR(45),
 email VARCHAR(100) UNIQUE,
 senha VARCHAR(255),
-vitorias INT DEFAULT 0, -- 0 ideias de como vai atualizar isso mas boto fé q vai pra frente lesgo
+vitorias INT DEFAULT 0,
 derrotas INT DEFAULT 0
 );
 
@@ -25,6 +25,8 @@ urlImg VARCHAR(255)
 CREATE TABLE favorito (
 fkUsuario INT,
 fkPersonagem INT,
+vitorias INT,
+derrotas INT,
 PRIMARY KEY (fkUsuario,fkPersonagem),
 FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 FOREIGN KEY (fkPersonagem) REFERENCES personagem(idPersonagem)
@@ -294,11 +296,6 @@ JOIN ataque a ON a.fkPersonagem = p.idPersonagem
 JOIN tipo t ON a.fkTipo = t.idTipo
 join usuario u on idUsuario = f.fkUsuario;
 
-insert into favorito values 
-(1,2),
-(1,3),
-(1,4);
-
 SELECT
 	u.nome Nome,
 	u.vitorias Vitorias,
@@ -318,7 +315,25 @@ SELECT
         vitorias,
         derrotas
     FROM usuario
-    WHERE idUsuario = 1;
+WHERE idUsuario = 1;
 
-UPDATE usuario SET vitorias = ? WHERE idUsuario = ?;
+UPDATE usuario SET vitorias = vitorias + 5 WHERE idUsuario = 1;
 UPDATE usuario SET derrotas = ? WHERE idUsuario = ?;
+
+SELECT 
+	idUsuario, 
+	nome, 
+	vitorias, 
+	derrotas 
+FROM usuario ORDER BY vitorias DESC
+limit 5;
+
+SELECT
+	p.idPersonagem id,
+    p.nome Personagem,
+    p.poder Poder,
+    p.urlImg Imagem,
+    f.vitorias vitorias,
+    f.derrotas derrotas
+FROM favorito f
+JOIN personagem p ON p.idPersonagem = f.fkPersonagem;

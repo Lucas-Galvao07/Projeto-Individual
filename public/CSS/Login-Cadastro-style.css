@@ -44,6 +44,26 @@ body {
     transform: translateY(-2px);
 }
 
+.nav-logo {
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: none;
+    position: relative;
+}
+
+.nav-logo img {
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* ======================== Layout ======================== */
 
 .box {

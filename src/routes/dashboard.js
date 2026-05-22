@@ -11,4 +11,7 @@ router.get("/dashboard/:idUsuario/favoritos", function (req, res) {
   dashboardController.buscarFavoritosDoUsuario(req, res);
 });
 
+router.get("/dashboard", function (req,res) {
+  dashboardController.buscarTop(req,res);
+})
 module.exports = router;

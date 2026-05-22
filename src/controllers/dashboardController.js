@@ -32,7 +32,22 @@ function buscarFavoritosDoUsuario(req, res) {
     });
 }
 
+function buscarTop(req, res) {
+  dashboardModel.buscarTop()
+    .then((resultado) => {
+      if (resultado.length === 0) {
+        return res.status(404).json({ mensagem: 'Nenhum Jogador Encontrado no Ranking' })
+      }
+      res.json(resultado);
+    })
+    .catch((erro) => {
+      console.error("Erro ao buscar jogadores:", erro)
+      res.status(500).json({ erro: erro.sqlMessage });
+    })
+}
+
 module.exports = {
   buscarInfoUsuario,
   buscarFavoritosDoUsuario,
+  buscarTop
 };

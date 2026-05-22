@@ -36,7 +36,22 @@ function buscarFavoritosDoUsuario(idUsuario) {
   return database.executar(instrucaoSql, [idUsuario]);
 }
 
+function buscarTop() {
+  var instrucaoSql = `
+  SELECT 
+	  idUsuario, 
+	  nome, 
+	  vitorias, 
+	  derrotas 
+  FROM usuario 
+  ORDER BY vitorias DESC
+  LIMIT 5;`;
+  console.log("SQL buscarTop:\n" + instrucaoSql)
+  return database.executar(instrucaoSql)
+}
+
 module.exports = {
   buscarInfoUsuario,
   buscarFavoritosDoUsuario,
+  buscarTop
 };

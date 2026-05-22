@@ -17,8 +17,8 @@ function buscarPersonagemPorId(req, res) {
 }
 
 function aumentarVitorias(req, res) {
-  var idUsuario  = req.params.idUsuario;
-  var quantidade = req.body.quantidade; // ✅ vem do fetch no jogo.html
+  var idUsuario = req.params.idUsuario;
+  var quantidade = req.body.quantidade;
 
   jogoModel.aumentarVitorias(idUsuario, quantidade)
     .then(() => res.json({ mensagem: `${quantidade} vitória(s) registrada(s)!` }))

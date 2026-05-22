@@ -55,7 +55,7 @@ function buscarAtaques(req, res) {
 }
 
 function adicionarFavorito(req, res) {
-  var idUsuario    = req.params.idUsuario;
+  var idUsuario = req.params.idUsuario;
   var idPersonagem = req.params.idPersonagem;
 
   personagemModel.adicionarFavorito(idUsuario, idPersonagem)

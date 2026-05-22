@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar">
         <div class="container nav-content">
-            <div class="nav-logo">GOH</div>
+            <div class="nav-logo"></div>
             <div class="nav-links">
                 <a href="index.html#Inicio" class="nav-ativo">Home</a>
                 <a href="index.html#Sobre">Sobre</a>
@@ -29,7 +29,7 @@
     <div class="dashboard-container">
 
         <aside class="sidebar">
-            <img id="imgPersonagem">
+            <img id="imgPersonagem" src="assets/imgs/Logo.png">
             <h3 id="nomePersonagem">Bem-Vindo <b>NOME</b></h3>
             <button onclick="mostrarDashboard()">Dashboard</button>
             <button onclick="mostrarFavoritos()">Personagens Favoritos</button>
@@ -96,7 +96,7 @@
             var total = usuario.Vitorias + usuario.Derrotas;
             var winrate = total > 0 ? ((usuario.Vitorias / total) * 100).toFixed(1) : 0;
             var rank = ''
-            var pontuacao = usuario.Vitorias * 100 - usuario.Derrotas * 200;
+            var pontuacao = usuario.Vitorias * 75 - usuario.Derrotas * 200;
             if (isNaN(pontuacao)) {
                 pontuacao = 0
             }

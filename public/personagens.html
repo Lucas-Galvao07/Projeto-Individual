@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar">
         <div class="container nav-content">
-            <div class="nav-logo">GOH</div>
+            <div class="nav-logo"><img src="assets/imgs/Logo.png"></div>
             <div class="nav-links">
                 <a href="index.html#Inicio" class="nav-ativo">Home</a>
                 <a href="index.html#Sobre">Sobre</a>
@@ -26,6 +26,11 @@
 
 
     <div class="container-personagens">
+        <div class="card-erro" id="cardErro">
+            <p class="card-erro-titulo" id="titulo_erro">Atenção</p>
+            <h2 id="mensagem_erro" class="mensagem-erro"></h2>
+            <button class="btn-fechar-erro" onclick="fecharErro()">Fechar</button>
+        </div>
 
         <div class="header-personagens" id="inicio">
             <h1>Personagens</h1>
@@ -69,11 +74,17 @@
                 personagens.forEach((personagem) => {
                     container.innerHTML += `
                     <div class="card-personagem">
-                        <img src="${personagem.Imagem}" class="img-personagem" alt="${personagem.Personagem}">
-                        <h2 class="nome-personagem">${personagem.Personagem}</h2>
-                        <p class="poder-personagem">${personagem.Poder}</p>
-                        <div class="acoes-personagem">
-                            <button class="btn-favoritar" onclick="favoritar(${personagem.id})">Favoritar⭐</button>
+                        <div class="frente">
+                            <img src="${personagem.Imagem}" class="img-personagem" alt="${personagem.Personagem}">
+                            <h2 class="nome-personagem">${personagem.Personagem}</h2>
+                            <p class="poder-personagem">${personagem.Poder}</p>
+                            <div class="acoes-personagem">
+                                <button class="btn-favoritar" onclick="favoritar(${personagem.id})">Favoritar⭐</button>
+                            </div>
+                        </div>
+                        <div class="atras">
+                        
+
                         </div>
                     </div>
                 `;
@@ -89,8 +100,11 @@
         var idUsuario = sessionStorage.getItem("ID_USUARIO");
 
         if (!idUsuario) {
-            alert("Você precisa estar logado para favoritar!");
-            window.location.href = "login.html";
+            mostrarErro(`Você precisa estar logado para favoritar! <br> Redirecionando para Login!`);
+            setTimeout(() => {
+                fecharErro();
+                window.location.href = "login.html";
+            }, 2000);
             return;
         }
 
@@ -98,8 +112,21 @@
             method: "POST"
         })
             .then((res) => res.json())
-            .then(() => alert("Personagem favoritado!"))
+            .then(() => {
+                titulo_erro.innerHTML = ''
+                mostrarErro("Personagem favoritado!");
+                setTimeout(() => fecharErro(), 2000);
+            })
             .catch((erro) => console.error("Erro ao favoritar:", erro));
+    }
+
+    function mostrarErro(msg) {
+        mensagem_erro.innerHTML = msg;
+        cardErro.classList.add('ativo');
+    }
+
+    function fecharErro() {
+        cardErro.classList.remove('ativo');
     }
 
     buscarPersonagens();
