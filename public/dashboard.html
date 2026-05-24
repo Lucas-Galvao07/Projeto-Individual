@@ -61,6 +61,13 @@
                 <p id="winrate">Winrate: 0%</p>
             </div>
 
+            <div class="top5-section">
+                <h4>TOP 5 JOGADORES</h4>
+                <ul class="top5-list" id="top5-lista">
+                    <!-- gerado pelo JS -->
+                </ul>
+            </div>
+
         </section>
 
         <section class="favoritos" id="favoritos">
@@ -170,6 +177,34 @@
         })
         .catch((erro) => console.error("Erro ao buscar favoritos:", erro));
 
+    fetch('/dashboard/top')
+        .then((res) => res.json())
+        .then((dados) => {
+            var lista = document.getElementById('top5-lista');
+            var classes = ['primeiro', 'segundo', 'terceiro', 'quarto', 'quinto'];
+
+            dados.forEach((usuario, index) => {
+                var total = usuario.vitorias + usuario.derrotas;
+                var wr = total > 0 ? ((usuario.vitorias / total) * 100).toFixed(0) : 0;
+                var iniciais = usuario.nome.split(' ').map(p => p[0]).slice(0, 2).join('').toUpperCase();
+
+                lista.innerHTML += `
+                <li class="top5-item ${classes[index]}">
+                    <span class="top5-pos">${index + 1}</span>
+                    <div class="top5-avatar">${iniciais}</div>
+                    <span class="top5-nome">${usuario.nome}</span>
+                    <div class="top5-winrate-bar">
+                        <div class="top5-winrate-fill" style="width:${wr}%"></div>
+                    </div>
+                    <div class="top5-stats">
+                        <span class="top5-vitorias">${usuario.vitorias} V</span>
+                        <span class="top5-detalhe">${usuario.derrotas} D · ${wr}% WR</span>
+                    </div>
+                </li>
+            `;
+            });
+        })
+        .catch((erro) => console.error('Erro ao buscar top 5:', erro));
     function selecionarPersonagem(idPersonagem) {
         localStorage.setItem("personagemSelecionado", idPersonagem);
         window.location.href = "jogo.html";

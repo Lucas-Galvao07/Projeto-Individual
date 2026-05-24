@@ -25,8 +25,6 @@ urlImg VARCHAR(255)
 CREATE TABLE favorito (
 fkUsuario INT,
 fkPersonagem INT,
-vitorias INT,
-derrotas INT,
 PRIMARY KEY (fkUsuario,fkPersonagem),
 FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 FOREIGN KEY (fkPersonagem) REFERENCES personagem(idPersonagem)

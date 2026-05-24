@@ -280,3 +280,203 @@ body {
 .card-personagem button:hover {
     background: #CECBF6;
 }
+
+.top5-section {
+    background: #1F1F1F;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 20px;
+}
+
+.top5-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 119, 255, 0.15);
+    padding-bottom: 14px;
+}
+
+.top5-header h4 {
+    font-family: 'Black Han Sans', sans-serif;
+    color: #0077ff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.top5-header span {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 400;
+    margin-left: auto;
+    letter-spacing: 0.5px;
+}
+
+.top5-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.top5-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 3px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+    cursor: default;
+}
+
+.top5-item:hover {
+    background: #161616;
+    border-color: rgba(0, 119, 255, 0.35);
+    border-left-color: rgba(0, 119, 255, 0.6);
+}
+
+.top5-item.primeiro {
+    border-left-color: #FFD700;
+}
+
+.top5-item.segundo {
+    border-left-color: #C0C0C0;
+}
+
+.top5-item.terceiro {
+    border-left-color: #CD7F32;
+}
+
+.top5-pos {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 17px;
+    width: 26px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.top5-item.primeiro .top5-pos {
+    color: #FFD700;
+}
+
+.top5-item.segundo .top5-pos {
+    color: #C0C0C0;
+}
+
+.top5-item.terceiro .top5-pos {
+    color: #CD7F32;
+}
+
+.top5-item.quarto .top5-pos,
+.top5-item.quinto .top5-pos {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.top5-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    border: 1px solid rgba(0, 119, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0077ff;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.top5-item.primeiro .top5-avatar {
+    background: rgba(255, 215, 0, 0.08);
+    border-color: rgba(255, 215, 0, 0.4);
+    color: #FFD700;
+}
+
+.top5-item.segundo .top5-avatar {
+    background: rgba(192, 192, 192, 0.08);
+    border-color: rgba(192, 192, 192, 0.4);
+    color: #C0C0C0;
+}
+
+.top5-item.terceiro .top5-avatar {
+    background: rgba(205, 127, 50, 0.08);
+    border-color: rgba(205, 127, 50, 0.4);
+    color: #CD7F32;
+}
+
+.top5-nome {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.3px;
+}
+
+.top5-winrate-bar {
+    width: 80px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.top5-winrate-fill {
+    height: 100%;
+    background: #0077ff;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+.top5-item.primeiro .top5-winrate-fill {
+    background: #FFD700;
+}
+
+.top5-item.segundo .top5-winrate-fill {
+    background: #C0C0C0;
+}
+
+.top5-item.terceiro .top5-winrate-fill {
+    background: #CD7F32;
+}
+
+.top5-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.top5-vitorias {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0077ff;
+    font-family: 'Black Han Sans', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.top5-item.primeiro .top5-vitorias {
+    color: #FFD700;
+}
+
+.top5-item.segundo .top5-vitorias {
+    color: #C0C0C0;
+}
+
+.top5-item.terceiro .top5-vitorias {
+    color: #CD7F32;
+}
+
+.top5-detalhe {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+}
