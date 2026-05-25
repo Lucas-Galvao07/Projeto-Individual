@@ -72,13 +72,13 @@ INSERT INTO personagem (nome, poder, descricao, urlImg) VALUES
 ('Baek Seungchul', 'Oxen King', 'Lutador genial armado com um taco de beisebol que usa cálculos matemáticos durante os combates e assina um contrato com o Charyeok do Rei Touro (Gyumaoh) para golpes físicos brutais e manipulação de raios.', 'https://i.pinimg.com/736x/be/a3/15/bea315cde6c60ccdf75793a2c2a68b54.jpg'),
 
 -- ORGANIZAÇÃO (EXECUTIVOS)
-('Executivo Q', 'Jokes', 'Juiz do torneio GOH que utiliza cartas de baralho como armas cortantes explosivas e invoca o Charyeok "Joker", um ser demoníaco impiedoso armado com uma foice.', 'https://static.wikia.nocookie.net/godofhighschool/images/9/93/IMG_3135.jpeg/revision/latest?cb=20200813150038'),
+('Executivo Q', 'Joker', 'Juiz do torneio GOH que utiliza cartas de baralho como armas cortantes explosivas e invoca o Charyeok "Joker", um ser demoníaco impiedoso armado com uma foice.', 'https://static.wikia.nocookie.net/godofhighschool/images/9/93/IMG_3135.jpeg/revision/latest?cb=20200813150038'),
 
-('Executivo O', 'Dragon Slayer', 'Juiz leal a Mubong que atua como domador de dragões através de seu Charyeok "Dragão Vermelho" (Choi Changsik), conseguindo conjurar escudos de chamas, voar e atacar com baforadas de fogo.', 'assets/imgs/Executivo-O.png'),
+('Executivo O', 'Dragão Vermelho', 'Juiz leal a Mubong que atua como domador de dragões através de seu Charyeok "Dragão Vermelho" (Choi Changsik), conseguindo conjurar escudos de chamas, voar e atacar com baforadas de fogo.', 'assets/imgs/Executivo-O.png'),
 
 ('Executivo P', 'Marionette', 'Juíza e estrategista que utiliza o Charyeok "Marionete", permitindo que ela crie fios para controlar o corpo de aliados e inimigos, imobilizar ameaças ou costurar ferimentos.', 'https://static.wikia.nocookie.net/godofhighschool/images/8/8d/TGOH_-_CH069_-_Judge_P.png/revision/latest?cb=20140731111645'),
 
-('Executivo S', 'Paladino de Siegfried', 'Juiz sub-líder que possui imensa resistência física e usa o Charyeok "Paladino/Siegfried", portando a mítica espada Walmung, invocando raios e curando aliados.', 'assets/imgs/Executivo-S.png'),
+('Executivo S', 'Paladino Siegfried', 'Juiz sub-líder que possui imensa resistência física e usa o Charyeok "Paladino/Siegfried", portando a mítica espada Walmung, invocando raios e curando aliados.', 'assets/imgs/Executivo-S.png'),
 
 ('Executivo T', 'Ascalon', 'Juiz cego e locutor oficial do torneio GOH. É um habilidoso mestre espadachim que usa um estilo de combate com cortes ágeis e precisos para compensar a sua falta de visão.', 'https://static.wikia.nocookie.net/godofhighschool/images/b/b3/Shim_Bong-Sa.jpg/revision/latest?cb=20120602035203'),
 
@@ -315,8 +315,8 @@ SELECT
     FROM usuario
 WHERE idUsuario = 1;
 
-UPDATE usuario SET vitorias = vitorias + 5 WHERE idUsuario = 1;
-UPDATE usuario SET derrotas = ? WHERE idUsuario = ?;
+-- UPDATE usuario SET vitorias = vitorias + 5 WHERE idUsuario = 1;
+-- UPDATE usuario SET derrotas = ? WHERE idUsuario = ?;
 
 SELECT 
 	idUsuario, 
@@ -325,13 +325,3 @@ SELECT
 	derrotas 
 FROM usuario ORDER BY vitorias DESC
 limit 5;
-
-SELECT
-	p.idPersonagem id,
-    p.nome Personagem,
-    p.poder Poder,
-    p.urlImg Imagem,
-    f.vitorias vitorias,
-    f.derrotas derrotas
-FROM favorito f
-JOIN personagem p ON p.idPersonagem = f.fkPersonagem;
