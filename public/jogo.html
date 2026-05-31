@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOH - Torneio</title>
     <link rel="stylesheet" href="CSS/jogo.css">
+    <link rel="icon" type="image/x-icon" href="./assets/icon/Logo.ico">
+    <title>GOH - Torneio</title>
 </head>
 
 <body>
@@ -49,14 +50,18 @@
 
     <div class="ataques" id="div_ataques"></div>
     <div class="log" id="log"></div>
-    <div id="div_resultado"></div>
-
+    <div id="div_resultado" class="resultado_overlay">
+        <div class="resultado_card">
+            <p id="resultado_mensagem"></p>
+            <button onclick="window.location.reload()">🔄 Jogar Novamente</button>
+        </div>
+    </div>
 
 </body>
 
 <script>
     var idUsuario = sessionStorage.getItem("ID_USUARIO");
-    var idPersonagem = localStorage.getItem("personagemSelecionado");
+    var idPersonagem = sessionStorage.getItem("personagemSelecionado");
 
     if (idUsuario == undefined) {
         window.location = 'login.html'
@@ -196,7 +201,8 @@
 
     function encerrar_jogo(mensagem, vitoria) {
         jogo_ativo = false;
-        divResultado.textContent = mensagem;
+        document.getElementById('resultado_mensagem').textContent = mensagem;
+        divResultado.classList.add('ativo');
         ataques.forEach((a) => { if (btns_ataque[a.nome]) btns_ataque[a.nome].disabled = true; });
 
         if (vitorias_rodada > 0) {

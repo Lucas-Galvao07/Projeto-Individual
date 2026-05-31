@@ -67,7 +67,7 @@ INSERT INTO personagem (nome, poder, descricao, urlImg) VALUES
 
 ('Park Ilpyo', 'Raposa de Nove Caudas', 'Lutador calculista que utiliza o Ssam-Su Taekkyeon e é recipiente da Raposa de Nove Caudas (Hojosa), sendo uma das "Chaves" do mundo e possuindo o poder de manipular chamas místicas.', 'assets/imgs/IlPyo-Inimigo.jpg'),
 
-('Lee Sujin', 'Artes Marciais', 'Reencarnação de Pandora (também uma "Chave") e mestre do Taekwondo ITF do Norte, possuindo controle sobre o ambiente, reflexão de ataques físicos e a habilidade de conjurar doenças.', 'assets/imgs/Lee-Sujin.png'),
+('Lee Sujin', 'Caixa de Pandora', 'Reencarnação de Pandora (também uma "Chave") e mestre do Taekwondo ITF do Norte, possuindo controle sobre o ambiente, reflexão de ataques físicos e a habilidade de conjurar doenças.', 'assets/imgs/Lee-Sujin.png'),
 
 ('Baek Seungchul', 'Oxen King', 'Lutador genial armado com um taco de beisebol que usa cálculos matemáticos durante os combates e assina um contrato com o Charyeok do Rei Touro (Gyumaoh) para golpes físicos brutais e manipulação de raios.', 'https://i.pinimg.com/736x/be/a3/15/bea315cde6c60ccdf75793a2c2a68b54.jpg'),
 
@@ -97,7 +97,6 @@ INSERT INTO personagem (nome, poder, descricao, urlImg) VALUES
 ('Sang Mandeok', 'Espadas de Deus', 'Bispo fanático da organização Nox que esconde sua crueldade implacável sob uma postura calma e sacerdotal. Utilizando o Charyeok "Lâminas de Deus" (Excalibur), ele conjura e manipula espadas douradas gigantescas de energia letal.', 'https://i.pinimg.com/736x/7b/9a/41/7b9a4168631a3124e70c7a3e94e7e1af.jpg'),
 
 ('Jang Hosik', 'Dragão Negro', 'Um Dragão Negro (Demônio) com a habilidade de assumir uma forma humana (Polymorph) e que serve como uma poderosa invocação/Charyeok sob o comando de Lee Sujin.', 'https://static.wikia.nocookie.net/godofhighschool/images/7/70/TGOH_-_CH051_-_Judge_O.jpg/revision/latest?cb=20140731112939');
-
 
 INSERT INTO ataque (nome, fkTipo, fkPersonagem) VALUES
 
@@ -315,7 +314,7 @@ SELECT
     FROM usuario
 WHERE idUsuario = 1;
 
--- UPDATE usuario SET vitorias = vitorias + 5 WHERE idUsuario = 1;
+-- UPDATE usuario SET vitorias = vitorias + ? WHERE idUsuario = ?;
 -- UPDATE usuario SET derrotas = ? WHERE idUsuario = ?;
 
 SELECT 

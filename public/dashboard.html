@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/Dashboard-style.css">
+    <link rel="icon" type="image/x-icon" href="./assets/icon/Logo.ico">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
@@ -206,7 +207,7 @@
         })
         .catch((erro) => console.error('Erro ao buscar top 5:', erro));
     function selecionarPersonagem(idPersonagem) {
-        localStorage.setItem("personagemSelecionado", idPersonagem);
+        sessionStorage.setItem("personagemSelecionado", idPersonagem);
         window.location.href = "jogo.html";
     }
 

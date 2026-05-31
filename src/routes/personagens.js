@@ -11,7 +11,6 @@ router.get("/personagens/favoritos/:idUsuario", function (req, res) {
     personagemController.buscarPersonagensFavoritos(req, res);
 });
 
-
 router.post("/personagens/:idPersonagem/favoritar/:idUsuario", function (req, res) {
     personagemController.adicionarFavorito(req, res);
 });
