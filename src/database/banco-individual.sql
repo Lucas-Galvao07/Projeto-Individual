@@ -293,20 +293,20 @@ JOIN ataque a ON a.fkPersonagem = p.idPersonagem
 JOIN tipo t ON a.fkTipo = t.idTipo
 join usuario u on idUsuario = f.fkUsuario;
 
+create view vw_personagens_favoritos as
 SELECT
 	u.nome Nome,
 	u.vitorias Vitorias,
     u.derrotas Derrotas,
     p.idPersonagem id,
     p.nome Personagem,
-    p.poder Poder,
-    p.descricao Descricao,
-    p.urlImg Imagem
+    p.poder Poder
 FROM usuario u
 JOIN favorito f ON f.fkUsuario = u.idUsuario
 JOIN personagem p ON p.idPersonagem = f.fkPersonagem
 WHERE u.idUsuario = 1
 ORDER BY p.idPersonagem;
+
 SELECT 
         idUsuario,
         vitorias,
@@ -324,3 +324,5 @@ SELECT
 	derrotas 
 FROM usuario ORDER BY vitorias DESC
 limit 5;
+
+select * from vw_personagens_favoritos;
